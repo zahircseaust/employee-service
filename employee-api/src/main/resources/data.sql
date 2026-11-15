@@ -1,0 +1,16 @@
+INSERT INTO employees (employee_code, first_name, last_name, email, phone, department, designation, status, join_date, salary) VALUES
+('EMP-001', 'Rahim',   'Uddin',   'rahim.uddin@acme.com',    '01710000001', 'IT',         'Software Engineer',   'ACTIVE',   '2023-02-15',  85000),
+('EMP-002', 'Karim',   'Hossain', 'karim.hossain@acme.com',  '01710000002', 'IT',         'Senior Engineer',     'ACTIVE',   '2021-07-01', 120000),
+('EMP-003', 'Fatema',  'Begum',   'fatema.begum@acme.com',   '01710000003', 'HR',         'HR Manager',          'ACTIVE',   '2020-01-10', 110000),
+('EMP-004', 'Nusrat',  'Jahan',   'nusrat.jahan@acme.com',   '01710000004', 'Finance',    'Accountant',          'ON_LEAVE', '2022-05-20',  70000),
+('EMP-005', 'Tanvir',  'Ahmed',   'tanvir.ahmed@acme.com',   '01710000005', 'IT',         'QA Engineer',         'ACTIVE',   '2024-03-01',  60000),
+('EMP-006', 'Sadia',   'Islam',   'sadia.islam@acme.com',    '01710000006', 'Marketing',  'Marketing Executive', 'ACTIVE',   '2023-09-12',  55000),
+('EMP-007', 'Arif',    'Rahman',  'arif.rahman@acme.com',    '01710000007', 'Sales',      'Sales Executive',     'INACTIVE', '2019-11-03',  50000),
+('EMP-008', 'Mitu',    'Akter',   'mitu.akter@acme.com',     '01710000008', 'HR',         'HR Executive',        'ACTIVE',   '2024-06-17',  45000),
+('EMP-009', 'Rahima',  'Khatun',  'rahima.khatun@acme.com',  '01710000009', 'Finance',    'Finance Manager',     'ACTIVE',   '2018-04-25', 130000),
+('EMP-010', 'Imran',   'Kabir',   'imran.kabir@acme.com',    '01710000010', 'IT',         'DevOps Engineer',     'ON_LEAVE', '2022-10-08',  95000),
+('EMP-011', 'Shila',   'Das',     'shila.das@acme.com',      '01710000011', 'Sales',      'Sales Manager',       'ACTIVE',   '2020-08-14', 105000),
+('EMP-012', 'Jahid',   'Hasan',   'jahid.hasan@acme.com',    '01710000012', 'IT',         'Junior Developer',    'ACTIVE',   '2025-01-05',  40000),
+('EMP-013', 'Farhana', 'Yasmin',  'farhana.yasmin@acme.com', '01710000013', 'Marketing',  'Content Writer',      'INACTIVE', '2021-03-22',  42000),
+('EMP-014', 'Habib',   'Mia',     'habib.mia@acme.com',      '01710000014', 'Operations', 'Operations Lead',     'ACTIVE',   '2019-06-30',  90000),
+('EMP-015', 'Rumana',  'Afroz',   'rumana.afroz@acme.com',   '01710000015', 'IT',         'Product Manager',     'ACTIVE',   '2022-02-14', 125000);
