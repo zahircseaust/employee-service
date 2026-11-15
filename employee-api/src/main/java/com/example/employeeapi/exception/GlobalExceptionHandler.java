@@ -16,6 +16,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import java.time.Instant;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -34,7 +35,9 @@ public class GlobalExceptionHandler {
         }
         ex.getBindingResult().getGlobalErrors()
                 .forEach(ge -> errors.putIfAbsent(ge.getObjectName(), ge.getDefaultMessage()));
-        return build(HttpStatus.BAD_REQUEST, "Validation failed", req, errors);
+        List<ErrorResponse.FieldIssue> issues = errors.entrySet().stream()
+                .map(e -> new ErrorResponse.FieldIssue(e.getKey(), e.getValue())).toList();
+        return build(HttpStatus.BAD_REQUEST, "Validation failed", req, issues);
     }
 
     /** Wrong type in a path variable, e.g. /api/employees/abc */
@@ -86,10 +89,10 @@ public class GlobalExceptionHandler {
     }
 
     private ResponseEntity<ErrorResponse> build(HttpStatus status, String message,
-                                                HttpServletRequest req, Map<String, String> errors) {
+                                                HttpServletRequest req, List<ErrorResponse.FieldIssue> errors) {
         ErrorResponse body = new ErrorResponse(
-                Instant.now(), status.value(), status.getReasonPhrase(),
-                message, req.getRequestURI(), errors);
+                false, status.value(), status.getReasonPhrase(),
+                message, req.getRequestURI(), errors, Instant.now());
         return ResponseEntity.status(status).body(body);
     }
 }

@@ -1,10 +1,11 @@
 package com.example.employeeapi.controller;
 
+import com.example.employeeapi.dto.ApiResponse;
 import com.example.employeeapi.dto.CreateEmployeeRequest;
 import com.example.employeeapi.dto.EmployeeDto;
 import com.example.employeeapi.dto.EmployeeFilter;
-import com.example.employeeapi.dto.PageResponse;
 import com.example.employeeapi.service.EmployeeService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -34,20 +36,24 @@ public class EmployeeController {
      *   GET /api/employees?search=a&department=IT&page=0&size=5 → all combined
      */
     @GetMapping
-    public PageResponse<EmployeeDto> getEmployees(
+    public ApiResponse<List<EmployeeDto>> getEmployees(
             @Valid @ModelAttribute EmployeeFilter filter,
-            @PageableDefault(size = 20, sort = "name", direction = Sort.Direction.ASC) Pageable pageable) {
-        return employeeService.getEmployees(filter, pageable);
+            @PageableDefault(size = 20, sort = "name", direction = Sort.Direction.ASC) Pageable pageable,
+            HttpServletRequest req) {
+        return ApiResponse.ok(200, "Employees retrieved successfully", req.getRequestURI(),
+                employeeService.getEmployees(filter, pageable));
     }
 
     /** Create: POST /api/employees → 201 Created */
     @PostMapping
-    public ResponseEntity<EmployeeDto> create(@Valid @RequestBody CreateEmployeeRequest request) {
+    public ResponseEntity<ApiResponse<EmployeeDto>> create(@Valid @RequestBody CreateEmployeeRequest request,
+                                                             HttpServletRequest req) {
         EmployeeDto created = employeeService.create(request);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .queryParam("id", created.id())
                 .build()
                 .toUri();
-        return ResponseEntity.created(location).body(created);
+        return ResponseEntity.created(location)
+                .body(ApiResponse.ok(201, "Employee created successfully", req.getRequestURI(), created));
     }
 }
